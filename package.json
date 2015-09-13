@@ -14,5 +14,8 @@
   "license": "MIT",
   "engines": {
     "atom": ">0.39.0"
+  },
+  "dependencies": {
+    "mdast": "^1.2.0"
   }
 }
