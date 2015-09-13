@@ -1,7 +1,7 @@
 {
   "name": "zotero-citations",
   "main": "./lib/zotero-citations",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
   "description": "Zotero citations for Markdown",
   "activationCommands": {
@@ -16,6 +16,7 @@
     "atom": ">0.39.0"
   },
   "dependencies": {
-    "mdast": "^1.2.0"
+    "mdast": "^1.2.0",
+    "sync-request": "^2.0.1"
   }
 }
