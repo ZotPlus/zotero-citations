@@ -4,8 +4,18 @@ Zotero Markdown citations
 This package adds Zotero support to Atom Markdown editing. To use it, you will need to have the [Better BibTeX](http://zotplus.github.io/better-bibtex/index.html) plugin installed in Zotero, and to have enabled 'Enable export by HTTP'. You also need the latest Atom version (1.0.7 at time of writing); older versions will not work, and are not supported.
 
 After that, you can add citations to your document by including them as reference-style links to your bibtex citation key, e.g.
-**\[\(Heyns, 2014\)\]\[@heyns2014\]**. You can put whatever you want in the first set of brackets (including nothing)
+**\[\(Heyns, 2014\)\]\[@heyns2014\]** or **\[\(Heyns, 2014\)\]\(#heyns2014\)**. You can put whatever you want in the first set of brackets (including nothing)
 and the package will fill out the citation when you execute 'Zotero Citations: Scan'.
+
+
+The two forms of in-text citations both have their pros and cons:
+
+* Definition-style links (\[\(Heyns, 2014\)\]\[@heyns2014\]) show the reference title when you hover over the rendered
+  HTML version (the title will be in the "title" attribute of the generated hyperlink), but since it is technically a label,
+  the [commonmark spec](http://spec.commonmark.org/0.22/#matches) says it needs to be case-folded, so you can only use
+  this form if your citekeys are lowercase ascii.
+* Regular links (\[\(Heyns, 2014\)\]\(#heyns2014\)) do not have this lowercase-ascii limitation, but they do not include
+  the "title" attribute in the generated link.
 
 ## Visual picking of citations
 
@@ -15,17 +25,12 @@ will insert these for you, formatted and all.
 
 **IMPORTANT**: Zotero, with Better BibTeX installed, must be running while you use these.
 
-To generate a bibliography, add the following where you want it to appear on a line of its own:
+To generate a bibliography, add the following where you want it to appear on a line of its own: **\[#bibliography\]: #**
 
-**\[#bibliography\]: #**
+The package will expand this to a full bibliography including the required fencing so it can be done again. The expanded
+version will have the bibliography surrounded with **\[#bibliography\]: #start** and **\[#bibliography\]: #end**.
 
-The package will expand this to a full bibliography including the required fencing so it can be done again.
-
-The default citation style is APA; if you want another style, include
-
-**\[#citation-style\]: #cell**
-
-(in case you want Cell) on a line of its own, *before* any citations (as the style goes into effect after this). And make sure you have the style installed in Zotero. You can get the style identifier (and style) from the [Zotero Style Repository](https://www.zotero.org/styles); the style identifier is the last part of the url of the style.
+The default citation style is APA; if you want another style, include **\[#citation-style\]: #cell** (in case you want Cell) on a line of its own. And make sure you have the style installed in Zotero. You can get the style identifier (and style) from the [Zotero Style Repository](https://www.zotero.org/styles); the style identifier is the last part of the url of the style.
 
 ## Caveat
 
