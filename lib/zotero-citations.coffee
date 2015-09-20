@@ -21,6 +21,7 @@ module.exports = ZoteroScan =
     req.send(null)
 
     atom.workspace.getActiveTextEditor()?.insertText(req.responseText) if req.status == 200 && req.responseText
+    atom.focus()
 
   scan: ->
     console.log("Scanning...")
