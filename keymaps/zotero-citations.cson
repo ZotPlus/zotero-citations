@@ -7,5 +7,3 @@
 
 # For more detailed documentation see
 # https://www.atom.io/docs/latest/advanced/keymaps
-'atom-text-editor':
-  'cmd-alt-a': 'zotero-citations:scan'

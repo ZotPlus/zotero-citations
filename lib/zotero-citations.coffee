@@ -4,10 +4,16 @@ schomd = require('./schomd')
 
 module.exports = ZoteroScan =
   config:
+    scanMode:
+      type: 'string'
+      default: 'markdown'
+      enum: ['markdown', 'pandoc']
+      title: 'Scan mode'
+      description: 'Scan mode: either pure-markdown, or Pandoc-compatible inline YAML'
     citationStyle:
       type: 'string'
       default: 'atom-zotero-citations'
-      enum: ['atom-zotero-citations', 'pandoc', 'mmd']
+      enum: ['atom-zotero-citations', 'pandoc', 'mmd', 'citet', 'citep']
       title: 'Citation style'
       description: 'Citation style returned by the CAYW picker'
 
@@ -24,7 +30,6 @@ module.exports = ZoteroScan =
 
   pick: ->
     req = new XMLHttpRequest()
-    #req.open('GET', 'http://localhost:23119/better-bibtex/cayw?format=atom-zotero-citations&minimize=true', false)
     req.open('GET', "http://localhost:23119/better-bibtex/cayw?format=#{atom.config.get('zotero-citations.citationStyle')}", false)
     req.send(null)
 
