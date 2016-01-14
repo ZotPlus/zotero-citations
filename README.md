@@ -32,6 +32,8 @@ version will have the bibliography surrounded with **\[#bibliography\]: #start**
 
 The default citation style is APA; if you want another style, include **\[#citation-style\]: #cell** (in case you want Cell) on a line of its own. And make sure you have the style installed in Zotero. You can get the style identifier (and style) from the [Zotero Style Repository](https://www.zotero.org/styles); the style identifier is the last part of the url of the style.
 
+You can also use the picker for MultiMarkdown or Pandoc citations; you can choose between the desired format in the package config. Not that of the three formats available, only `atom-zotero-citations` will work with the `scan` command.
+
 ## Caveat
 
 This is still very early work, put together over two days during christmas, you can expect there to be bugs. The real gruntwork of the citations is done by BBT, which is by now extensively tested, and this package is really not much code, but: *it edits your text*. Undo ought to work, but still. Please report any issues at https://github.com/ZotPlus/zotero-citations
