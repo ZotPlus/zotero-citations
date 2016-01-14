@@ -30,11 +30,21 @@ module.exports = ZoteroScan =
 
   pick: ->
     req = new XMLHttpRequest()
-    req.open('GET', "http://localhost:23119/better-bibtex/cayw?format=#{atom.config.get('zotero-citations.citationStyle')}", false)
+    req.open('GET', "http://localhost:23119/better-bibtex/cayw?format=#{atom.config.get('zotero-citations.citationStyle')}", true)
+    req.onload = (e) ->
+      if req.readyState == 4
+        if req.status == 200
+          atom.workspace.getActiveTextEditor()?.insertText(req.responseText) if req.responseText
+        else
+          console.error(req.statusText)
+        atom.focus()
+
+    req.onerror = (e) ->
+      console.error(req.statusText)
+      atom.focus()
+
     req.send(null)
 
-    atom.workspace.getActiveTextEditor()?.insertText(req.responseText) if req.status == 200 && req.responseText
-    atom.focus()
 
   scan: ->
     console.log("Scanning...")
