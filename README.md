@@ -34,7 +34,21 @@ The default citation style is APA; if you want another style, include **\[#citat
 
 You can also use the picker for MultiMarkdown or Pandoc citations; you can choose between the desired format in the package config. Not that of the three formats available, only `atom-zotero-citations` will work with the `scan` command.
 
-## Caveat
+## Caveat -- DO READ
 
-This is still very early work, put together over two days during christmas, you can expect there to be bugs. The real gruntwork of the citations is done by BBT, which is by now extensively tested, and this package is really not much code, but: *it edits your text*. Undo ought to work, but still. Please report any issues at https://github.com/ZotPlus/zotero-citations
+This is still very early work, put together over two days during christmas. The first thing to stress is this:
+
+**this plugin will actively change your text**
+
+In the good case, it will change only those parts you want, but I cannot guarantee this; the plugin will parse your
+markdown source using [mdast](https://github.com/wooorm/mdast), replace the magic links it finds in the parsed
+structure, and turn the parsed markdown back into text using mdast. This transformation using mdast is *semantically,
+but not literally* lossless. It will, for example, merrily parse lists with items marked with `*`, but it will always
+output lists that are marked with `-`.  There's nothing I can do about this short of writing my own markdown parser,
+which is not on the table.
+
+Undo ought to work, but I cannot stress this enough: It will modify your text. I am not wholly comfortable doing this,
+but it's the only way I knew how to do pure-markdown citations.
+
+Please report any issues at https://github.com/ZotPlus/zotero-citations
 
