@@ -16,6 +16,10 @@ module.exports = ZoteroScan =
       enum: ['atom-zotero-citations', 'pandoc', 'mmd', 'citet', 'citep']
       title: 'Citation style'
       description: 'Citation style returned by the CAYW picker'
+    anchorLinks:
+      type: 'boolean'
+      default: false
+      description: 'Parse and replace anchor-type links'
 
   subscriptions: null
 

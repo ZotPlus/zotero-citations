@@ -117,7 +117,8 @@ class Walker
   keys: (id) ->
     return [] unless id
     atkeys = id.split(/\s*,\s*/)
-    keys = (key.slice(1) for key in atkeys when key[0] in ['@', '#'])
+    markers = if atom.config.get('zotero-citations.anchorLinks') then ['@', '#'] else ['@']
+    keys = (key.slice(1) for key in atkeys when key[0] in markers)
     return keys if atkeys.length == keys.length
     return []
 

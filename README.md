@@ -15,7 +15,9 @@ The two forms of in-text citations both have their pros and cons:
   the [commonmark spec](http://spec.commonmark.org/0.22/#matches) says it needs to be case-folded, so you can only use
   this form if your citekeys are lowercase ascii.
 * Regular links (\[\(Heyns, 2014\)\]\(#heyns2014\)) do not have this lowercase-ascii limitation, but they do not include
-  the "title" attribute in the generated link.
+  the "title" attribute in the generated link. This 'works' because such links are in fact internal anchors in an HTML
+  document; if you actually want to use internal anchors in your document and not have this plugin mess with them,
+  disable "parse anchor links" in the options.
 
 ## Visual picking of citations
 
