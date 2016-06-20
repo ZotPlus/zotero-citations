@@ -50,9 +50,6 @@ class Walker
       when 'link'
         keys = @keys(node.href)
 
-      when 'linkReference'
-        keys = @keys(node.identifier)
-
       when 'definition'
         if node.identifier == '#citation-style'
           style = node.link.replace(/^#/, '')
@@ -121,12 +118,8 @@ class Walker
     return bib
 
   keys: (id) ->
-    return [] unless id
-    atkeys = id.split(/\s*,\s*/)
-    markers = if atom.config.get('zotero-citations.anchorLinks') then ['@', '#'] else ['@']
-    keys = (key.slice(1) for key in atkeys when key[0] in markers)
-    return keys if atkeys.length == keys.length
-    return []
+    return [] unless id && m = id.match(/^(\?|#)@(.*)/)
+    return m[2].split(',')
 
 module.exports = (processor) ->
   return (ast) ->
