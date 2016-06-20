@@ -8,7 +8,12 @@ class Walker
     @scan(@ast)
     @style ?= 'apa'
 
-    @citations = @remote('citations', [@citations, {style: @style}]) if @citations.length > 0
+    try
+      @citations = @remote('citations', [@citations, {style: @style}]) if @citations.length > 0
+    catch err
+      console.log("failed to fetch citations: %j", err.message)
+      atom.notifications.addError('Zotero Citations: could not connect to Zotero. Are you sure it is running?');
+      return
 
     @inBibliography = false
     @process(@ast)
@@ -106,6 +111,7 @@ class Walker
       bib = @remote('bibliography', [keys, {caseInsensitive: @caseInsensitive, style: @style}])
     catch err
       console.log("failed to fetch bibliography: %j", err.message)
+      atom.notifications.addError('Zotero Citations: could not connect to Zotero. Are you sure it is running?');
       return ''
 
     if !bib
