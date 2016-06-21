@@ -16,7 +16,11 @@
     "atom": ">0.39.0"
   },
   "dependencies": {
+    "js-yaml": "^3.6.1",
     "mdast": "^1.2.0",
     "sync-request": "^2.0.1"
+  },
+  "devDependencies": {
+    "coffeelint": "^1.15.7"
   }
 }

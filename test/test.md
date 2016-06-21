@@ -1,10 +1,17 @@
-[??][@bentley_academic_2011]
+---
+title: "Sample Document"
+output: html_document
+bibliography: bibliography.bib
+---
+[@bentley_academic_2011,@TayEA11]
+more from @bentley_academic_2011,@TayEA11 etc
+also cite @yoffe_campus_2015
 
-[][@TayEA11]
-[](@TayEA11,@CumEA14)
-[](@CapEA113)
+[](#@TayEA11)
+[](#@TayEA11,@CumEA14)
+[](#@CapEA113)
 
-[\(Latour, 2005/2008\)][@latour_ny_2008]
+[\(Latour, 2005/2008\)](#@latour_ny_2008)
 
 [#citation-style]: #ieee
 [#bibliography]: #start
