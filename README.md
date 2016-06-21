@@ -3,21 +3,17 @@ Zotero Markdown citations
 
 This package adds Zotero support to Atom Markdown editing. To use it, you will need to have the [Better BibTeX](http://zotplus.github.io/better-bibtex/index.html) plugin installed in Zotero. If using Zotero for Firefox, you also need to enable `Enable export by HTTP` in the `Better BibTeX` tab of the Zotero preferences. You also need the latest Atom version (1.0.7 at time of writing); older versions are not supported and may not work.
 
-After that, you can add citations to your document by including them as reference-style links to your bibtex citation key, e.g.
-**\[\(Heyns, 2014\)\]\[@heyns2014\]** or **\[\(Heyns, 2014\)\]\(#heyns2014\)**. You can put whatever you want in the first set of brackets (including nothing)
+After that, you can add citations to your document by including them as hyperlinks to your bibtex citation key, using
+either one of the formats
+`[\(Heyns, 2014\)](#@heyns2014)` or 
+`[\(Heyns, 2014\)](?@heyns2014,heyns2015)`. Use the former if you're only citing a single reference, as the generated
+reference will include a link to jump to the correct place in your bibliography. As this cannot be done for
+multi-reference citations (hyperlinks need a single place to jump to), you can use the second format to generate a
+dead-but-not-broken link. Either one will do the job.
+You can put whatever you want in the first set of brackets (including nothing)
 and the package will fill out the citation when you execute 'Zotero Citations: Scan'.
 
-
 The two forms of in-text citations both have their pros and cons:
-
-* Definition-style links (\[\(Heyns, 2014\)\]\[@heyns2014\]) show the reference title when you hover over the rendered
-  HTML version (the title will be in the "title" attribute of the generated hyperlink), but since it is technically a label,
-  the [commonmark spec](http://spec.commonmark.org/0.22/#matches) says it needs to be case-folded, so you can only use
-  this form if your citekeys are lowercase ascii.
-* Regular links (\[\(Heyns, 2014\)\]\(#heyns2014\)) do not have this lowercase-ascii limitation, but they do not include
-  the "title" attribute in the generated link. This 'works' because such links are in fact internal anchors in an HTML
-  document; if you actually want to use internal anchors in your document and not have this plugin mess with them,
-  disable "parse anchor links" in the options.
 
 ## Visual picking of citations
 
