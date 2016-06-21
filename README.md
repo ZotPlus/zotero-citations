@@ -1,6 +1,8 @@
 Zotero Markdown citations
 =========
 
+## Pure-markdown citations
+
 This package adds Zotero support to Atom Markdown editing. To use it, you will need to have the [Better BibTeX](http://zotplus.github.io/better-bibtex/index.html) plugin installed in Zotero. If using Zotero for Firefox, you also need to enable `Enable export by HTTP` in the `Better BibTeX` tab of the Zotero preferences. You also need the latest Atom version (1.0.7 at time of writing); older versions are not supported and may not work.
 
 After that, you can add citations to your document by including them as hyperlinks to your bibtex citation key, using
@@ -13,13 +15,25 @@ dead-but-not-broken link. Either one will do the job.
 You can put whatever you want in the first set of brackets (including nothing)
 and the package will fill out the citation when you execute 'Zotero Citations: Scan'.
 
-The two forms of in-text citations both have their pros and cons:
+## Pandoc-style bibliography
+
+If you prefer to use Pandoc (which is sensible) for your articles, you can set the scanmode to `pandoc`, and if you have
+a YAML header such as this at the top:
+
+```
+---
+title: "Sample Document"
+---
+```
+
+a scan will try to find all your citations and add an inline YAML bibliography to your document.
 
 ## Visual picking of citations
 
 If you don't feel like typing
 these out (and let's be honest, you don't), executing 'Zotero Citations: Pick' will call up a graphical picker which
-will insert these for you, formatted and all.
+will insert these for you, formatted and all. You can set what style you want your picked citations to be returned in in
+the preferences
 
 **IMPORTANT**: Zotero, with Better BibTeX installed, must be running while you use these.
 
