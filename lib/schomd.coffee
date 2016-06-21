@@ -1,15 +1,15 @@
 yaml = require('js-yaml')
 
 # debug
-#if not atom
-#  atom =
-#    notifications:
-#      addError: (msg) -> console.log('addError:', msg)
-#    config:
-#      get: (pref) ->
-#        switch pref
-#          when 'zotero-citations.scanMode' then 'pandoc'
-#          else throw new Error("Unsupported debug pref #{pref}")
+if not atom
+  atom =
+    notifications:
+      addError: (msg) -> console.log('addError:', msg)
+    config:
+      get: (pref) ->
+        switch pref
+          when 'zotero-citations.scanMode' then 'markdown'
+          else throw new Error("Unsupported debug pref #{pref}")
 
 class Walker
   constructor: (@processor, @ast) ->
@@ -24,7 +24,7 @@ class Walker
 
     try
       @citations.labels = @remote('citations', [@citations.keys, {style: @style}]) if @citations.keys.length > 0
-      for i, label in @citations.labels
+      for label, i in @citations.labels
         continue if label
         atom.notifications.addError("No citation found for #{@citations.keys[i].join(',')}")
     catch err
