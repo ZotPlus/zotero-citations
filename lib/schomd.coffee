@@ -23,7 +23,10 @@ class Walker
     @style ?= 'apa'
 
     try
-      @citations.labels = @remote('citations', [@citations.keys, {style: @style}]) if @citations.keys.length > 0
+      if @citations.keys.length > 0
+        @citations.labels = @remote('citations', [@citations.keys, {style: @style}])
+      else
+        @citations.labels = []
       for label, i in @citations.labels
         continue if label
         atom.notifications.addError("No citation found for #{@citations.keys[i].join(',')}")
