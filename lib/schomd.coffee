@@ -1,7 +1,10 @@
 yaml = require('js-yaml')
+deasync = require('deasync')
+request = require('request')
 
 # debug
 if not atom
+  console.log('atom not defined, instantiating debug stubs')
   atom =
     notifications:
       addError: (msg) -> console.log('addError:', msg)
@@ -17,8 +20,6 @@ class Walker
     @citations = {keys: []}
     @cited = {}
 
-    @XMLHttpRequest = (typeof XMLHttpRequest != 'undefined')
-
     @scan(@ast)
     @style ?= 'apa'
 
@@ -31,37 +32,12 @@ class Walker
         continue if label
         atom.notifications.addError("No citation found for #{@citations.keys[i].join(',')}")
     catch err
-      console.log("failed to fetch citations: %j", err.message)
+      console.log("failed to fetch citations: %j", err)
       atom.notifications.addError('Zotero Citations: could not connect to Zotero. Are you sure it is running?')
       return
 
     @inBibliography = false
     @process(@ast)
-
-  remote: (method, params) ->
-    if @XMLHttpRequest
-      client = new XMLHttpRequest()
-      req = JSON.stringify({method, params})
-      client.open('POST', 'http://localhost:23119/better-bibtex/schomd', false)
-      client.send(req)
-
-      try
-        res = JSON.parse(client.responseText)
-      catch err
-        res = {error: err.message}
-
-    else
-      @request ?= require('sync-request')
-      try
-        res = @request('POST', 'http://localhost:23119/better-bibtex/schomd', {json: {method, params}})
-        res = JSON.parse(res.getBody('utf8'))
-      catch err
-        res = {error: err.message}
-
-    if res.error
-      console.log(res.error)
-      throw new Error(res.error)
-    return res.result
 
   scan: (node) ->
     return unless node
@@ -168,6 +144,41 @@ class Walker
       return ''
 
     return bib
+
+  remote: (method, params) ->
+    try
+      res = @post(method, params)
+    catch err
+      res = {error: err.message}
+
+    if res.error
+      console.log(res.error)
+      throw new Error(res.error)
+    return res.result
+
+if typeof XMLHttpRequest == 'undefined'
+  Walker::post = (method, params) ->
+    status = {}
+    request({
+      url: 'http://localhost:23119/better-bibtex/schomd'
+      method: 'POST'
+      json: true
+      body: {method, params}
+    }, (error, response, body) ->
+      status.error = error
+      status.body = body
+      status.done = true
+    )
+    require('deasync').runLoopOnce() while !status.done
+    throw status.error if status.error
+    return status.body
+
+else
+  Walker::post = (method, params) ->
+    client = new XMLHttpRequest()
+    client.open('POST', 'http://localhost:23119/better-bibtex/schomd', false)
+    client.send(JSON.stringify({method, params}))
+    return JSON.parse(client.responseText)
 
 module.exports = (processor) ->
   return (ast) ->
