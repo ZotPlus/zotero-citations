@@ -3,16 +3,16 @@ deasync = require('deasync')
 request = require('request')
 
 # debug
-if not atom
-  console.log('atom not defined, instantiating debug stubs')
-  atom =
-    notifications:
-      addError: (msg) -> console.log('addError:', msg)
-    config:
-      get: (pref) ->
-        switch pref
-          when 'zotero-citations.scanMode' then 'markdown'
-          else throw new Error("Unsupported debug pref #{pref}")
+#if not atom
+#  console.log('atom not defined, instantiating debug stubs')
+#  atom =
+#    notifications:
+#      addError: (msg) -> console.log('addError:', msg)
+#    config:
+#      get: (pref) ->
+#        switch pref
+#          when 'zotero-citations.scanMode' then 'markdown'
+#          else throw new Error("Unsupported debug pref #{pref}")
 
 class Walker
   constructor: (@processor, @ast) ->
@@ -45,7 +45,7 @@ class Walker
     keys = []
     switch node.type
       when 'link'
-        keys = m[2].split(',') if @mode == 'markdown' && node.href && m = node.href.match(/^(\?|#)@(.*)/)
+        keys = m[2].split(',') if @mode == 'markdown' && node.href && m = node.href.match(/^(\?@|#@)(.*)/)
 
       when 'linkReference'
         if @mode == 'pandoc' && node.identifier && node.identifier.match(/^@/)
@@ -93,9 +93,10 @@ class Walker
       header = yaml.safeLoad(node.value)
       try
         bib = yaml.safeLoad(@remote('bibliography', [keys, {format: 'yaml'}]))
-        header.references = bib.references
+        header.references = bib.references if bib.references
         node.value = yaml.safeDump(header)
-      catch
+      catch err
+        console.log(err)
         atom.notifications.addError('Zotero Citations: could not connect to Zotero. Are you sure it is running?')
       return
 
@@ -146,39 +147,26 @@ class Walker
     return bib
 
   remote: (method, params) ->
-    try
-      res = @post(method, params)
-    catch err
-      res = {error: err.message}
-
-    if res.error
-      console.log(res.error)
-      throw new Error(res.error)
-    return res.result
-
-if typeof XMLHttpRequest == 'undefined'
-  Walker::post = (method, params) ->
     status = {}
-    request({
-      url: 'http://localhost:23119/better-bibtex/schomd'
-      method: 'POST'
-      json: true
-      body: {method, params}
-    }, (error, response, body) ->
-      status.error = error
-      status.body = body
-      status.done = true
-    )
-    require('deasync').runLoopOnce() while !status.done
-    throw status.error if status.error
-    return status.body
+    try
+      request({
+        url: 'http://localhost:23119/better-bibtex/schomd'
+        method: 'POST'
+        json: true
+        body: {method, params}
+      }, (error, response, body) ->
+        status.error = error
+        status.body = body
+        status.done = true
+      )
+      require('deasync').runLoopOnce() while !status.done
+    catch err
+      status.error = err.message
 
-else
-  Walker::post = (method, params) ->
-    client = new XMLHttpRequest()
-    client.open('POST', 'http://localhost:23119/better-bibtex/schomd', false)
-    client.send(JSON.stringify({method, params}))
-    return JSON.parse(client.responseText)
+    if status.error
+      console.log(status.error)
+      throw new Error(status.error)
+    return status.body
 
 module.exports = (processor) ->
   return (ast) ->
