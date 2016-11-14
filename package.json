@@ -16,10 +16,10 @@
     "atom": ">0.39.0"
   },
   "dependencies": {
-    "deasync": "^0.1.7",
     "js-yaml": "^3.6.1",
     "mdast": "^1.2.0",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "request-promise": "^4.1.1"
   },
   "devDependencies": {
     "coffeelint": "^1.15.7"
