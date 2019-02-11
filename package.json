@@ -11,7 +11,7 @@
     "test": "tslint -t stylish 'lib/**/*.ts' --exclude 'lib/**/*.d.ts' && tsc",
     "install": "tsc"
   },
-  "repository": "https://github.com/atom/zotero-citations",
+  "repository": "https://github.com/retorquere/zotero-citations",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
