@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Pick zotero citation",
+        "command": "zotero-citations:pick"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Zotero",
+          "submenu": [
+            {
+              "label": "Pick",
+              "command": "zotero-citations:pick"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

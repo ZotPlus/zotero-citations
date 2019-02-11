@@ -1,26 +1,27 @@
 {
   "name": "zotero-citations",
   "main": "./lib/zotero-citations",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Zotero citations for Markdown",
+  "version": "5.0.0",
+  "description": "Zotero citations picker for Markdown/LaTeX",
+  "keywords": [],
   "activationCommands": {
-    "atom-workspace": [
-      "zotero-citations:pick"
-    ]
+    "atom-workspace": "zotero-citations:pick"
   },
-  "repository": "https://github.com/ZotPlus/zotero-citations",
+  "scripts": {
+    "test": "tslint -t stylish 'lib/**/*.ts' --exclude 'lib/**/*.d.ts' && tsc",
+    "install": "tsc"
+  },
+  "repository": "https://github.com/atom/zotero-citations",
   "license": "MIT",
   "engines": {
-    "atom": ">0.39.0"
+    "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "js-yaml": "^3.6.1",
-    "mdast": "^1.2.0",
-    "request": "^2.72.0",
-    "request-promise": "^4.1.1"
-  },
-  "devDependencies": {
-    "coffeelint": "^1.15.7"
+    "@types/node": "^10.12.24",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
   }
 }
