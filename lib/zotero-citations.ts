@@ -13,7 +13,15 @@ module.exports = {
     citationStyle: {
       type: 'string',
       default: 'pandoc',
-      enum: ['pandoc', 'mmd', 'cite', 'citet', 'citep', 'LaTeX'],
+      enum: [
+        'pandoc',
+        'mmd',
+        'cite',
+        'citet',
+        'citep',
+        'LaTeX'
+        { value: 'playground', description: 'citation key'}
+      ],
       title: 'Citation style',
       description: 'Citation style returned by the CAYW picker',
     },
