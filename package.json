@@ -1,7 +1,7 @@
 {
   "name": "zotero-citations",
   "main": "./lib/zotero-citations",
-  "version": "5.1.2",
+  "version": "5.2.0",
   "description": "Zotero citations picker for Markdown/LaTeX",
   "keywords": [],
   "activationCommands": {
