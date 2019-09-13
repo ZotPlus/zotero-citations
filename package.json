@@ -17,11 +17,11 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "@types/node": "^10.12.24",
+    "@types/node": "^12.7.5",
     "request": "^2.88.0",
-    "request-promise": "^4.2.2",
-    "ts-node": "^8.0.2",
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
+    "request-promise": "^4.2.4",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
   }
 }

@@ -10,6 +10,16 @@ import request = require('request-promise')
 
 module.exports = {
   config: {
+    port: {
+      type: 'string',
+      default: '23119',
+      enum: [
+        { value: '23119', description: 'Zotero'},
+        { value: '24119', description: 'Juris-M'},
+      ],
+      title: 'Connect to',
+      description: 'Choose wether to connect to Zotero or Juris-M',
+    },
     citationStyle: {
       type: 'string',
       default: 'pandoc',
@@ -62,9 +72,10 @@ module.exports = {
 
   pick() {
     const style = atom.config.get('zotero-citations.citationStyle')
+    const port = atom.config.get('zotero-citations.port')
     const cmd = atom.config.get('zotero-citations.latexCommand') || 'cite'
     const params = (style === 'LaTeX' ) ? `format=latex&command=${encodeURIComponent(cmd || 'cite')}` : `format=${encodeURIComponent(style)}`
-    const url = `http://127.0.0.1:23119/better-bibtex/cayw?${params}`
+    const url = `http://127.0.0.1:${port}/better-bibtex/cayw?${params}`
 
     console.log(`Getting ${url}`)
     request(url).then(result => {
