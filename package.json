@@ -19,7 +19,7 @@
   "dependencies": {
     "@types/node": "^12.7.5",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
+    "request-promise": "^4.2.5",
     "ts-node": "^8.3.0",
     "tslint": "^5.20.0",
     "typescript": "^3.6.3"
