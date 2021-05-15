@@ -9,7 +9,6 @@
   },
   "scripts": {
     "lint": "eslint . --ext .ts --cache --cache-location .eslintcache/",
-    "install": "tsc",
     "start": "tsc"
   },
   "repository": "git@github.com:retorquere/zotero-citations.git",
