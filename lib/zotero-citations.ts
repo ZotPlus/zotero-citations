@@ -1,9 +1,9 @@
-// tslint:disable:no-console
+/* eslint-disable no-console */
 declare const atom: any
 
 // import ZoteroCitationsView from './zotero-citations-view'
 
-// @ts-ignore
+// @ ts-ignore
 import { CompositeDisposable } from 'atom'
 
 import request = require('request-promise')
@@ -47,7 +47,7 @@ module.exports = {
   // modalPanel: null,
   subscriptions: null,
 
-  activate(state) {
+  activate(_state) {
     /*
     this.zoteroCitationsView = new ZoteroCitationsView(state.zoteroCitationsViewState)
     this.modalPanel = atom.workspace.addModalPanel({
@@ -60,7 +60,7 @@ module.exports = {
     this.subscriptions = new CompositeDisposable()
 
     this.subscriptions.add(atom.commands.add('atom-workspace', {
-      'zotero-citations:pick': () => this.pick(),
+      'zotero-citations:pick': () => { this.pick() },
     }))
   },
 
@@ -70,7 +70,7 @@ module.exports = {
     // this.zoteroCitationsView.destroy()
   },
 
-  pick() {
+  pick() { // eslint-disable-line prefer-arrow/prefer-arrow-functions
     const style = atom.config.get('zotero-citations.citationStyle')
     const port = atom.config.get('zotero-citations.port')
     const cmd = atom.config.get('zotero-citations.latexCommand') || 'cite'

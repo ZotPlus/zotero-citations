@@ -1,9 +1,9 @@
-// tslint:disable:no-console
+/* eslint-disable no-console */
 
 export default class ZoteroCitationsView {
   private element: HTMLElement
 
-  constructor(serializedState) {
+  constructor(_serializedState) {
     // Create root element
     this.element = document.createElement('div')
     this.element.classList.add('zotero-citations')
