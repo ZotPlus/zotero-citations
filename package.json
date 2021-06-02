@@ -9,7 +9,8 @@
   },
   "scripts": {
     "lint": "eslint . --ext .ts --cache --cache-location .eslintcache/",
-    "start": "tsc"
+    "start": "tsc",
+    "apm": "/Applications/Atom.app//Contents/Resources/app/apm/bin/apm"
   },
   "repository": "git@github.com:retorquere/zotero-citations.git",
   "license": "MIT",
@@ -17,17 +18,17 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^15.3.0",
+    "@types/node": "^15.6.2",
     "@types/node-fetch": "^2.5.10",
-    "@typescript-eslint/eslint-plugin": "^4.22.1",
-    "@typescript-eslint/parser": "^4.22.1",
-    "eslint": "^7.25.0",
-    "eslint-plugin-import": "^2.22.1",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prefer-arrow": "^1.2.3"
   },
   "dependencies": {
     "node-fetch": "^2.6.1",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.4"
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
   }
 }
